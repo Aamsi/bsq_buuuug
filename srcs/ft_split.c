@@ -6,21 +6,11 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:32:58 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 09:33:34 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/29 11:20:41 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
-int		ft_len(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "bsq.h"
 
 int		is_sep(char c, char *charset)
 {
@@ -82,7 +72,8 @@ char	**ft_split(char *str, char *charset)
 		if (!is_sep(str[i], charset))
 		{
 			k = -1;
-			strs[j] = malloc(sizeof(*strs) * (count_let(str, charset, i) + 1));
+			if (!(strs[j] = malloc(sizeof(*strs) * (count_let(str, charset, i) + 1))))
+				return (0);
 			while (!is_sep(str[i], charset) && str[i])
 				strs[j][++k] = str[i++];
 			strs[j][++k] = '\0';
@@ -92,4 +83,25 @@ char	**ft_split(char *str, char *charset)
 	}
 	strs[j] = 0;
 	return (strs);
+}
+
+char	**get_new_matrix(char **strs)
+{
+	int i;
+	int	len_matrix;
+	char **new_matrix;
+
+	len_matrix = 1;
+	while (strs[len_matrix])
+		len_matrix++;
+	if (!(new_matrix = malloc(sizeof(new_matrix) * len_matrix)))
+		return (0);
+	i = 1;
+	while (strs[i])
+	{
+		new_matrix[i]= ft_strdup(strs[i]);
+		i++;	
+	}
+	new_matrix[i] = 0;
+	return (new_matrix);
 }

@@ -6,13 +6,13 @@
 #    By: iouali <iouali@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/29 09:06:47 by iouali            #+#    #+#              #
-#    Updated: 2020/09/29 09:16:10 by iouali           ###   ########.fr        #
+#    Updated: 2020/09/29 10:18:38 by iouali           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = ./srcs/parsing.c
+SRCS = ./srcs/parsing.c ./srcs/ft_split.c
 OBJS = ${SRCS:.c=.o}
 INCS = includes
 NAME = bsq
