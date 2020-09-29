@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:07:48 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 12:02:47 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/29 18:27:21 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int		check_first_line(char *str)
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
+		i++;
 	}
 	return (1);
 }
 
 t_plat_info		assign_el(char **matrix, char *first_line)
 {
-	int			i;
 	int			len_fl;
 	t_plat_info	infos;
 
@@ -97,6 +97,7 @@ int				check_charac(char **matrix, char obst, char empty)
 		}
 		i++;
 	}
+	return (1);
 }
 
 int				check_same_nb_col(char **matrix)
@@ -106,48 +107,87 @@ int				check_same_nb_col(char **matrix)
 	i = 1;
 	while (matrix[i])
 	{
-		if (ft_len(matrix[i]) != ft_len(matrix[i - 1]))
+		if (ft_len(matrix[i]) != ft_len(matrix[i - 1]))	
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-t_plat_info		get_all_infos(char *str)
+void	print_matrix(char **strs)
+{
+	int i;
+
+	i = 0;
+	while (strs[i])
+	{
+		printf("matrix[%d]: %s\n", i, strs[i]);
+		i++;
+	}
+}
+
+int		get_all_infos(char *str, t_plat_info infos)
 {
 	char		**matrix;
-	t_plat_info	infos;
 
 	if (!(matrix = ft_split(str, "\n")))
-		return ;
+		return (0);
+	if (ft_len_strs(matrix) <= 1)
+		return (0);
 	if (!(check_first_line(matrix[0])))
-		return ;
+	{
+		//printf("first line\n");
+		return (0);
+	}
+	//printf("segfault\n");
 	infos = assign_el(matrix, matrix[0]);
 	if ((check_nb_lines(infos.matrix, infos.nb_lines)) != 0)
-		return ;
+	{
+		//printf("nb_lines\n");
+		return (0);
+	}
+	//printf("segfault1\n");
 	if (!(check_charac(infos.matrix, infos.obstacle, infos.empty_char)))
-		return ;
+	{
+		//printf("check_carac\n");
+		return (0);
+	}
+	//printf("segfault2\n");
 	if (!(check_same_nb_col(infos.matrix)))
-		return ;
-	if ((infos.empty_char == infos.filler) || infos.empty_char == infos.obstacle || infos.obstacle == infos.filler)
-		return ;
-	return (infos);
+	{
+		//printf("same_col\n");
+		return (0);
+	}
+	//printf("segfault3\n");
+	if ((infos.empty_char == infos.filler) || infos.empty_char == infos.obstacle ||
+		 infos.obstacle == infos.filler)
+	{
+		//printf("same charac\n");
+		return (0);
+	}
+	//printf("segfault4\n");
+	return (1);
 }
 
 int		parsing(char *filename)
 {
-	char	*big_str;
+	char			*big_str;
 	t_plat_info		infos;
-	int		fd;
-	int		nb_charac;
+	int				fd;
+	int				nb_charac;
+	int				ret;
 
+	infos.nb_lines = 0;
 	nb_charac = count_charac(filename);
-	if (!(big_str = malloc(nb_charac + 1)))
+	if (!(big_str = malloc(nb_charac)))
 		return (0);
 	if ((fd = open(filename, O_RDONLY)) <= 0)
 		return (0);
-	if ((read(fd, big_str, nb_charac)))
-	if (!(infos = get_all_infos(big_str)))
+	if ((ret = read(fd, big_str, nb_charac )) < 1)
+		return (0);
+	big_str[ret] = '\0';
+	//printf("big_str:\n%s\n", big_str);
+	if (!(get_all_infos(big_str, infos)))
 		return (0);
 	return (1);
 }

@@ -6,11 +6,10 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:27:23 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 11:36:20 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/29 18:21:09 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "bsq.h"
 
 int		ft_len(char *str)
@@ -19,6 +18,16 @@ int		ft_len(char *str)
 
 	i = 0;
 	while (str[i])
+		i++;
+	return (i);
+}
+
+int		ft_len_strs(char **strs)
+{
+	int i;
+
+	i = 0;
+	while (strs[i])
 		i++;
 	return (i);
 }

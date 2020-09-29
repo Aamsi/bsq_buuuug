@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:21:44 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 11:37:43 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/29 18:22:11 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ char	**get_new_matrix(char **strs);
 char	*ft_strdup(char *src);
 int		ft_atoi(char *str, int index);
 int		ft_len(char *str);
+int		ft_len_strs(char **strs);
 
 #endif

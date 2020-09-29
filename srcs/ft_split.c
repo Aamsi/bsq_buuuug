@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:32:58 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 11:20:41 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/29 18:06:26 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ char	**get_new_matrix(char **strs)
 	i = 1;
 	while (strs[i])
 	{
-		new_matrix[i]= ft_strdup(strs[i]);
-		i++;	
+		//printf("strs[%d]: %s\n", i, strs[i]);
+		new_matrix[i - 1]= ft_strdup(strs[i]);
+		//printf("new_matrix[%d - 1]: %s\n", i, new_matrix[i - 1]);
+		i++;
 	}
-	new_matrix[i] = 0;
+	new_matrix[i - 1] = 0;
 	return (new_matrix);
 }
