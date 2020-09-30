@@ -6,16 +6,15 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:32:58 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 11:56:52 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 13:42:00 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int		is_sep(char c, char *charset)
+int		ft_is_sep(char c, char *charset)
 {
 	int i;
-
 	i = 0;
 	while (charset[i])
 	{
@@ -25,63 +24,65 @@ int		is_sep(char c, char *charset)
 	}
 	return (0);
 }
-
-int		count_words(char *str, char *charset)
+int		ft_nb_words(char *str, char *charset)
 {
 	int i;
-	int count;
-
-	count = 0;
+	int j;
 	i = 0;
-	while (is_sep(str[i], charset))
-		i++;
-	i++;
+	j = 0;
 	while (str[i])
 	{
-		if (is_sep(str[i - 1], charset) && !is_sep(str[i], charset))
-			count++;
+		if (!ft_is_sep(str[i], charset))
+		{
+			j++;
+			while (str[i] && !ft_is_sep(str[i], charset))
+				i++;
+		}
+		else
+			i++;
+	}
+	return (j);
+}
+int		ft_len_sep(int n, char *str, char *charset)
+{
+	int i;
+	int j;
+	i = n;
+	j = 0;
+	while (str[i] && !ft_is_sep(str[i], charset))
+	{
+		j++;
 		i++;
 	}
-	return (count + 1);
+	return (j);
 }
-
-int		count(char *str, char *charset, int index)
+char	**ft_split(char *str, char *charset)
 {
-	int j;
-
-	j = index;
-	while (!is_sep(str[index], charset) && str[index])
-		index++;
-	return (index - j);
-}
-
-char	**ft_split(char *str, char *sep)
-{
-	char	**strs;
+	char	**array;
 	int		i;
 	int		j;
 	int		k;
-
-	if (!(strs = malloc(sizeof(strs) * (count_words(str, sep) + 1))))
-		return (0);
 	i = 0;
-	j = -1;
-	while (is_sep(str[i], sep))
-		i++;
-	while (str[i++])
+	j = 0;
+	if (!(array = malloc(sizeof(char *) * (ft_nb_words(str, charset) + 1))))
+		return (0);
+	while (str[i])
 	{
-		if (!is_sep(str[i], sep))
+		k = 0;
+		if (!ft_is_sep(str[i], charset))
 		{
-			k = -1;
-			if (!(strs[++j] = malloc(sizeof(*strs) * (count(str, sep, i) + 1))))
-				return (free_split(strs, j));
-			while (!is_sep(str[i], sep) && str[i])
-				strs[j][++k] = str[i++];
-			strs[j][++k] = '\0';
+			if (!(array[j] = malloc(sizeof(char) * (ft_len_sep(i, str, charset) + 1))))
+				return (free_split(array, j));
+			// printf("array[j]: %p\n", &(array[j]));
+			while (!ft_is_sep(str[i], charset) && str[i])
+				array[j][k++] = str[i++];
+			array[j++][k] = '\0';
 		}
+		else
+			i++;
 	}
-	strs[j] = 0;
-	return (strs);
+	array[j] = 0;
+	return (array);
 }
 
 char	**get_new_matrix(char **strs)
