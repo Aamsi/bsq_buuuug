@@ -6,23 +6,25 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:02:24 by ebedoise          #+#    #+#             */
-/*   Updated: 2020/09/30 14:19:28 by ebedoise         ###   ########.fr       */
+/*   Updated: 2020/09/30 18:05:43 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-void	print_matrix(t_plat_info datas, char **tab)
+void	print_matrix(t_plat_info datas, char **tab, int ac, int index)
 {
 	int i;
 
 	i = 0;
 	while (i < datas.nb_lines)
 	{
-		ft_putstr(tab[i]);
-		ft_putstr("\n");
+		ft_str(tab[i]);
+		ft_str("\n");
 		i++;
 	}
+	if (index < ac - 1)
+		write(1, "\n", 1);
 }
 
 char	**fill_square(t_plat_info datas, char **tab, int i)

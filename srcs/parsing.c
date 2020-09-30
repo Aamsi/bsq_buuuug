@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:07:48 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 14:50:49 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 18:02:19 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_plat_info		get_all_infos(char *str)
 		infos.empty_char == infos.obstacle ||
 		infos.obstacle == infos.filler)
 		return (reterror(infos, 2, str, matrix));
-	free_all_ok(matrix, str);
+	//free_strs(matrix);
+	//free(str);
 	return (infos);
 }
 
@@ -91,7 +92,7 @@ t_plat_info		parsing(char *filename)
 		return (reterror(infos, 0, big_str, infos.matrix));
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (reterror(infos, 1, big_str, infos.matrix));
-	if ((ret = read(fd, big_str, nb_charac)) < 0)
+	if ((ret = read(fd, big_str, nb_charac)) < 1)
 		return (reterror(infos, 1, big_str, infos.matrix));
 	big_str[ret] = '\0';
 	if (big_str[ret - 1] != '\n')

@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:27:23 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 12:39:38 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 17:53:24 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_strdup(char *src)
 	return (cpy);
 }
 
-void	ft_putstr(char *str)
+void	ft_str(char *str)
 {
 	int i;
 

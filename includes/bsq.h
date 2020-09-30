@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:21:44 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 15:09:25 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 17:53:24 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ typedef struct	s_tester
 	int			y_bis;
 }				t_tester;
 
-void			print_matrix(t_plat_info datas, char **tab);
-void			ft_putstr(char *str);
+void			print_matrix(t_plat_info datas, char **tab, int ac, int i);
+void			ft_str(char *str);
 void			free_all_ok(char **strs, char *str);
 void			free_strs(char **strs);
 void			debug_matrix(char **strs);
+void			print_info(t_plat_info infos);
 char			**ft_split(char *str, char *charset);
 char			**get_new_matrix(char **strs);
 char			**fill_soluce(t_plat_info datas, char **tab);
