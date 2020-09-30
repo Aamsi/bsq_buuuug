@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:32:43 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 14:28:37 by ebedoise         ###   ########.fr       */
+/*   Updated: 2020/09/30 15:21:08 by ebedoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		main(int ac, char **av)
 				print_matrix(datas, matrix);
 			}
 		}
-		write(1, "\n", 1);
+		if (i < ac - 1)
+			write(1, "\n", 1);
 		i++;
 	}
 	return (0);
