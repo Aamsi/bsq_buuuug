@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:32:43 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 10:55:55 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 11:49:27 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		main(int ac, char **av)
 {
 	t_plat_info datas;
-	char 		**matrix;
+	char		**matrix;
 
 	(void)ac;
 	matrix = 0;

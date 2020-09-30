@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:32:58 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 10:52:13 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 11:56:52 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		count_words(char *str, char *charset)
 	return (count + 1);
 }
 
-int		count_let(char *str, char *charset, int index)
+int		count(char *str, char *charset, int index)
 {
 	int j;
 
@@ -55,32 +55,30 @@ int		count_let(char *str, char *charset, int index)
 	return (index - j);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char *str, char *sep)
 {
 	char	**strs;
 	int		i;
 	int		j;
 	int		k;
 
-	if (!(strs = malloc(sizeof(strs) * (count_words(str, charset) + 1))))
+	if (!(strs = malloc(sizeof(strs) * (count_words(str, sep) + 1))))
 		return (0);
 	i = 0;
-	j = 0;
-	while (is_sep(str[i], charset))
+	j = -1;
+	while (is_sep(str[i], sep))
 		i++;
-	while (str[i])
+	while (str[i++])
 	{
-		if (!is_sep(str[i], charset))
+		if (!is_sep(str[i], sep))
 		{
 			k = -1;
-			if (!(strs[j] = malloc(sizeof(*strs) * (count_let(str, charset, i) + 1))))
+			if (!(strs[++j] = malloc(sizeof(*strs) * (count(str, sep, i) + 1))))
 				return (free_split(strs, j));
-			while (!is_sep(str[i], charset) && str[i])
+			while (!is_sep(str[i], sep) && str[i])
 				strs[j][++k] = str[i++];
 			strs[j][++k] = '\0';
-			j++;
 		}
-		i++;
 	}
 	strs[j] = 0;
 	return (strs);
@@ -88,9 +86,9 @@ char	**ft_split(char *str, char *charset)
 
 char	**get_new_matrix(char **strs)
 {
-	int i;
-	int	len_matrix;
-	char **new_matrix;
+	int		i;
+	int		len_matrix;
+	char	**new_matrix;
 
 	len_matrix = 1;
 	while (strs[len_matrix])
@@ -100,7 +98,7 @@ char	**get_new_matrix(char **strs)
 	i = 1;
 	while (strs[i])
 	{
-		if (!(new_matrix[i - 1]= ft_strdup(strs[i])))
+		if (!(new_matrix[i - 1] = ft_strdup(strs[i])))
 			return (free_split(new_matrix, i - 1));
 		i++;
 	}
