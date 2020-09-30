@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:21:44 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 14:33:48 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 15:09:25 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void			print_matrix(t_plat_info datas, char **tab);
 void			ft_putstr(char *str);
 void			free_all_ok(char **strs, char *str);
 void			free_strs(char **strs);
-char			*ft_realloc(char *ptr, int size);
+void			debug_matrix(char **strs);
 char			**ft_split(char *str, char *charset);
 char			**get_new_matrix(char **strs);
 char			**fill_soluce(t_plat_info datas, char **tab);
 char			**free_split(char **strs, int j);
+char			*ft_realloc(char *ptr, int size);
 char			*ft_strdup(char *src);
 int				ft_atoi(char *str, int index);
 int				ft_len(char *str);
@@ -59,6 +60,7 @@ t_plat_info		solver(t_plat_info datas);
 t_plat_info		parsing(char *filename);
 t_plat_info		reterror(t_plat_info infos, int ertyp, char *big_str,
 						char **matrix);
+t_plat_info		turbo_tester(t_plat_info datas, int i, int j);
 t_plat_info		parsing_stdin();
 
 #endif
