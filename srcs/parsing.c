@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:07:48 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 18:02:19 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 21:44:49 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,17 @@ t_plat_info		get_all_infos(char *str)
 		return (reterror(infos, 2, str, matrix));
 	infos = assign_el(matrix, matrix[0]);
 	if ((check_nb_lines(infos.matrix, infos.nb_lines)) != 0)
-		return (reterror(infos, 2, str, matrix));
+		return (reterror(infos, 3, str, matrix));
 	if (!(check_charac(infos.matrix, infos.obstacle, infos.empty_char)))
-		return (reterror(infos, 2, str, matrix));
+		return (reterror(infos, 3, str, matrix));
 	if (!(check_same_nb_col(infos.matrix)))
-		return (reterror(infos, 2, str, matrix));
+		return (reterror(infos, 3, str, matrix));
 	if ((infos.empty_char == infos.filler) ||
 		infos.empty_char == infos.obstacle ||
 		infos.obstacle == infos.filler)
-		return (reterror(infos, 2, str, matrix));
-	//free_strs(matrix);
-	//free(str);
+		return (reterror(infos, 3, str, matrix));
+	free_strs(matrix);
+	free(str);
 	return (infos);
 }
 
@@ -88,7 +88,7 @@ t_plat_info		parsing(char *filename)
 		return (reterror(infos, 0, big_str, infos.matrix));
 	if (nb_charac < 4)
 		return (reterror(infos, 0, big_str, infos.matrix));
-	if (!(big_str = malloc(nb_charac)))
+	if (!(big_str = malloc(nb_charac + 1)))
 		return (reterror(infos, 0, big_str, infos.matrix));
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (reterror(infos, 1, big_str, infos.matrix));
@@ -109,8 +109,8 @@ t_plat_info		parsing_stdin(void)
 	t_plat_info	infos;
 	int			i;
 
-	infos.matrix = 0;
 	i = 0;
+	infos.matrix = 0;
 	if (!(big_str = malloc(sizeof(char) * 1)))
 		return (reterror(infos, 0, big_str, infos.matrix));
 	big_str[0] = '\0';
@@ -122,9 +122,9 @@ t_plat_info		parsing_stdin(void)
 		big_str[i + 1] = '\0';
 		i++;
 	}
-	if (ft_len(big_str) < 4)
-		return (reterror(infos, 1, big_str, infos.matrix));
 	if (big_str[i - 1] != '\n')
+		return (reterror(infos, 1, big_str, infos.matrix));
+	if (ft_len(big_str) < 4)
 		return (reterror(infos, 1, big_str, infos.matrix));
 	infos = get_all_infos(big_str);
 	return (infos);
