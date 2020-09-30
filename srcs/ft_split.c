@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:32:58 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 22:09:55 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 10:52:13 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char	**ft_split(char *str, char *charset)
 	int		j;
 	int		k;
 
-	strs = malloc(sizeof(strs) * (count_words(str, charset) + 1));
+	if (!(strs = malloc(sizeof(strs) * (count_words(str, charset) + 1))))
+		return (0);
 	i = 0;
 	j = 0;
 	while (is_sep(str[i], charset))
@@ -73,7 +74,7 @@ char	**ft_split(char *str, char *charset)
 		{
 			k = -1;
 			if (!(strs[j] = malloc(sizeof(*strs) * (count_let(str, charset, i) + 1))))
-				return (0);
+				return (free_split(strs, j));
 			while (!is_sep(str[i], charset) && str[i])
 				strs[j][++k] = str[i++];
 			strs[j][++k] = '\0';
@@ -99,9 +100,8 @@ char	**get_new_matrix(char **strs)
 	i = 1;
 	while (strs[i])
 	{
-		//printf("strs[%d]: %s\n", i, strs[i]);
-		new_matrix[i - 1]= ft_strdup(strs[i]);
-		//printf("new_matrix[%d - 1]: %s\n", i, new_matrix[i - 1]);
+		if (!(new_matrix[i - 1]= ft_strdup(strs[i])))
+			return (free_split(new_matrix, i - 1));
 		i++;
 	}
 	new_matrix[i - 1] = 0;

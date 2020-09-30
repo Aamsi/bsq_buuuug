@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:07:48 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 22:21:29 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 11:06:57 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		count_charac(char *filename)
 	int		nb_charac;
 
 	nb_charac = 0;
-	if ((fd = open(filename, O_RDONLY)) <= 0)
+	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (0);
 	while (read(fd, buf, 1) > 0)
 		nb_charac++;
@@ -33,7 +33,6 @@ int		check_first_line(char *str)
 	int nb_len;
 
 	i = ft_len(str);
-	//printf("%d\n", i);
 	if (i < 4)
 		return (0);
 	i--;
@@ -74,20 +73,14 @@ t_plat_info		assign_el(char **matrix, char *first_line)
 	infos.matrix = 0;
 	len_fl = ft_len(first_line);
 	infos.filler = first_line[len_fl - 1];
-	// printf("infos_filler: %c\n", infos.filler);
 	infos.obstacle = first_line[len_fl - 2];
-	// printf("infos_obstacle: %c\n", infos.obstacle);
 	infos.empty_char = first_line[len_fl - 3];
-	// printf("infos_empty_char: %c\n", infos.empty_char);
 	infos.nb_lines = ft_atoi(first_line, ft_len(first_line) - 3);
-	// printf("infos_nb_lines: %d\n", infos.nb_lines);
 	infos.best_size = 0;
 	infos.x = 0;
 	infos.y = 0;
 	infos.matrix = get_new_matrix(matrix);
-	// printf("hey infos.matrix\n");
 	infos.nb_columns = nb_columns(infos.matrix);
-	// printf("infos_nb_col: %d\n", infos.nb_columns);
 	return (infos);
 }
 
@@ -147,55 +140,50 @@ void	print_matrix_debug(char **strs)
 	}
 }
 
+t_plat_info		return_error(t_plat_info infos, int errtype, char *big_str, char **matrix)
+{
+	int i;
+
+	i = 0;
+	if (errtype == 1)
+		free(big_str);
+	if (errtype > 1)
+	{
+		while(matrix[i])
+		{
+			free(matrix[i]);
+			i++;
+		}
+		free(matrix);
+		free(big_str);
+	}
+	infos.matrix = 0;
+	return (infos);
+}
+
 t_plat_info		get_all_infos(char *str)
 {
 	char		**matrix;
 	t_plat_info	infos;
 
+	matrix = 0;
+	infos.matrix = 0;
 	if (!(matrix = ft_split(str, "\n")))
-		infos.matrix = 0;
-	// printf("segfault-2\n");
+		return (return_error(infos, 1, str, matrix));
 	if (ft_len_strs(matrix) <= 1)
-		infos.matrix = 0;
-	// printf("segfault-1\n");
+		return (return_error(infos, 2, str, matrix));
 	if (!(check_first_line(matrix[0])))
-	{
-		printf("first line\n");
-		infos.matrix = 0;
-	}
-	// printf("segfault\n");
+		return (return_error(infos, 2, str, matrix));
 	infos = assign_el(matrix, matrix[0]);
 	if ((check_nb_lines(infos.matrix, infos.nb_lines)) != 0)
-	{
-		printf("nb_lines\n");
-		infos.matrix = 0;
-		return (infos);
-	}
-	// printf("segfault1\n");
+		return (return_error(infos, 2, str, matrix));
 	if (!(check_charac(infos.matrix, infos.obstacle, infos.empty_char)))
-	{
-		printf("check_carac\n");
-		infos.matrix = 0;
-		return (infos);
-	}
-	// printf("segfault2\n");
+		return (return_error(infos, 2, str, matrix));
 	if (!(check_same_nb_col(infos.matrix)))
-	{
-		printf("same_col\n");
-		infos.matrix = 0;
-		return (infos);
-	}
-	// printf("segfault3\n");
+		return (return_error(infos, 2, str, infos.matrix));
 	if ((infos.empty_char == infos.filler) || infos.empty_char == infos.obstacle ||
 		 infos.obstacle == infos.filler)
-	{
-		printf("same charac\n");
-		infos.matrix = 0;
-		return (infos);
-	}
-	// print_matrix_debug(infos.matrix);
-	// printf("%p\n", &infos);
-	// printf("segfault4\n");
+		return (return_error(infos, 2, str, matrix));
 	return (infos);
 }
 
@@ -207,35 +195,21 @@ t_plat_info		parsing(char *filename)
 	int				ret;
 	t_plat_info		infos;
 
-	nb_charac = count_charac(filename);
+	infos.matrix = 0;
+	big_str = 0;
+	if (!(nb_charac = count_charac(filename)))
+		return (return_error(infos, 0, big_str, infos.matrix));
 	if (nb_charac < 4)
-	{
-		infos.matrix = 0;
-		return (infos);
-	}
-	// printf("ici\n");
+		return(return_error(infos, 0, big_str, infos.matrix));
 	if (!(big_str = malloc(nb_charac)))
-	{
-		infos.matrix = 0;
-		return (infos);
-	}
-	// printf("ici1\n");
-	if ((fd = open(filename, O_RDONLY)) <= 0)
-	{
-		infos.matrix = 0;
-		return (infos);
-	}
-	// printf("ici2\n");
-	if ((ret = read(fd, big_str, nb_charac )) < 1)
-	{
-		infos.matrix = 0;
-		return (infos);
-	}	
-	// printf("ici3\n");
+		return(return_error(infos, 0, big_str, infos.matrix));
+	if ((fd = open(filename, O_RDONLY)) < 0)
+		return(return_error(infos, 1, big_str, infos.matrix));
+	if ((ret = read(fd, big_str, nb_charac)) < 1)
+		return(return_error(infos, 1, big_str, infos.matrix));
 	big_str[ret] = '\0';
-	// printf("ici4\n");
-	// printf("big_str:\n%s\n", big_str);
+	if (big_str[ret - 1] != '\n')
+		return(return_error(infos, 1, big_str, infos.matrix));	
 	infos = get_all_infos(big_str);
-	// printf("ici5\n");
 	return (infos);
 }

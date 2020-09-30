@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:21:44 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/29 19:15:17 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 10:48:35 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char			*ft_strdup(char *src);
 int				ft_atoi(char *str, int index);
 int				ft_len(char *str);
 int				ft_len_strs(char **strs);
+char			**free_split(char **strs, int j);
 t_plat_info		solver(t_plat_info datas);
 t_plat_info		parsing(char *filename);
 

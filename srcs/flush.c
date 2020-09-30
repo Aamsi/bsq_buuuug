@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   flush.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/29 18:32:43 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 10:55:55 by iouali           ###   ########.fr       */
+/*   Created: 2020/09/30 10:44:07 by iouali            #+#    #+#             */
+/*   Updated: 2020/09/30 11:08:36 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int		main(int ac, char **av)
+char		**free_split(char **strs, int j)
 {
-	t_plat_info datas;
-	char 		**matrix;
+	while (j >= 0)
+	{
+		free(strs[j]);
+		j--;
+	}
+	free(strs);
+	return (0);
+}
 
-	(void)ac;
-	matrix = 0;
-	datas = parsing(av[1]);
-	if (datas.matrix == 0)
-	{
-		write(1, "map error\n", 10);
-		return (0);
-	}
-	datas = solver(datas);
-	if (datas.x == 0 && datas.y == 0 && datas.best_size == 0 &&
-		datas.matrix[0][0] == datas.obstacle)
-	{
-		write(1, "map error\n", 10);
-		return (0);
-	}
-	matrix = fill_soluce(datas, matrix);
-	print_matrix(datas, matrix);
+int		free_struct(t_plat_info infos)
+{
+	free(infos.matrix);
 	return (0);
 }
