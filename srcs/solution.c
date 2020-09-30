@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:02:24 by ebedoise          #+#    #+#             */
-/*   Updated: 2020/09/30 14:02:16 by ebedoise         ###   ########.fr       */
+/*   Updated: 2020/09/30 14:19:28 by ebedoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,8 @@ char	**fill_soluce(t_plat_info datas, char **tab)
 	if (!(tab = malloc(sizeof(char *) * (datas.nb_lines + 1))))
 		return (0);
 	while (i < datas.nb_lines)
-	{
-		if (!(tab[i] = malloc(sizeof(char) * (datas.nb_columns + 1))))
+		if (!(tab[i++] = malloc(sizeof(char) * (datas.nb_columns + 1))))
 			return (0);
-		i++;
-	}
 	i = 0;
 	while (i < datas.y)
 	{

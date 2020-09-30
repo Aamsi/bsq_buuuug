@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:32:43 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 14:06:01 by ebedoise         ###   ########.fr       */
+/*   Updated: 2020/09/30 14:14:23 by ebedoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		main(int ac, char **av)
 	char		**matrix;
 	int			i;
 
-	i = 0;
+	i = 1;
 	while (i < ac)
 	{
 		matrix = 0;
