@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:32:58 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 18:53:23 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 22:31:37 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	**get_new_matrix(char **strs)
 	len_matrix = 1;
 	while (strs[len_matrix])
 		len_matrix++;
-	if (!(new_matrix = malloc(sizeof(new_matrix) * len_matrix)))
+	if (!(new_matrix = malloc(sizeof(new_matrix) * (len_matrix))))
 		return (0);
 	i = 1;
 	while (strs[i])

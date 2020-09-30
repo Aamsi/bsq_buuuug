@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:27:23 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 21:31:28 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 22:41:30 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_strdup(char *src)
 	src_len = 0;
 	while (src[src_len])
 		src_len++;
-	cpy = malloc((1 + src_len) * sizeof(*cpy));
+	cpy = malloc((src_len + 1) * sizeof(char));
 	if (!cpy)
 		return (0);
 	i = 0;
