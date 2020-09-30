@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:21:44 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 11:58:22 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 13:41:23 by ebedoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int				check_first_line(char *str);
 int				nb_columns(char **matrix);
 int				check_nb_lines(char **matrix, int nb_lines);
 int				check_charac(char **matrix, char obst, char empty);
+t_plat_info		turbo_tester(t_plat_info datas, int i, int j);
 t_plat_info		solver(t_plat_info datas);
 t_plat_info		parsing(char *filename);
 t_plat_info		reterror(t_plat_info infos, int ertyp, char *big_str,
