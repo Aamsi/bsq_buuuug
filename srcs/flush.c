@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 10:44:07 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 22:57:24 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 23:10:05 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ t_plat_info	reterror(t_plat_info infos, int ertyp, char *big_str, char **matrix)
 	if (ertyp == 2 || ertyp == 3)
 	{
 		while (matrix[i])
-		{
-			free(matrix[i]);
-			i++;
-		}
+			free(matrix[i++]);
 		free(matrix);
 		free(big_str);
 	}
@@ -53,20 +50,6 @@ t_plat_info	reterror(t_plat_info infos, int ertyp, char *big_str, char **matrix)
 	return (infos);
 }
 
-void		free_all_ok(char **strs, char *str)
-{
-	int i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-	free(str);
-}
-
 void		free_strs(char **strs)
 {
 	int i;
@@ -80,7 +63,7 @@ void		free_strs(char **strs)
 	free(strs);
 }
 
-void	free_matrix(t_plat_info datas)
+void		free_matrix(t_plat_info datas)
 {
 	int i;
 
@@ -92,7 +75,7 @@ void	free_matrix(t_plat_info datas)
 	}
 }
 
-void	free_tab(char **tab)
+void		free_tab(char **tab)
 {
 	int i;
 

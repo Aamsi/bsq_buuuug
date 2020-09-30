@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:32:43 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 22:57:10 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 23:16:40 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		no_params(void)
 				datas.matrix[0][0] == datas.obstacle)
 			write(1, "map error\n", 10);
 		else
-			print_matrix(datas, fill_soluce(datas, matrix), 0, 0);
+			print_matrix(datas, fill_soluce(datas, matrix, 0), 0, 0);
 	}
 	return (0);
 }
@@ -56,7 +56,7 @@ int		main(int ac, char **av)
 					datas.matrix[0][0] == datas.obstacle)
 				i < ac - 1 ? ft_str("map error\n\n") : ft_str("map error\n");
 			else
-				print_matrix(datas, fill_soluce(datas, matrix), ac, i);
+				print_matrix(datas, fill_soluce(datas, matrix, 0), ac, i);
 		}
 		i++;
 	}

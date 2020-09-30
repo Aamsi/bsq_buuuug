@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:02:24 by ebedoise          #+#    #+#             */
-/*   Updated: 2020/09/30 22:52:58 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 23:17:25 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	print_matrix(t_plat_info datas, char **tab, int ac, int index)
 	if (index < ac - 1)
 		write(1, "\n", 1);
 	free_tab(tab);
-	free_matrix(datas);
 }
 
 char	**fill_square(t_plat_info datas, char **tab, int i)
@@ -53,11 +52,8 @@ char	**fill_square(t_plat_info datas, char **tab, int i)
 	return (tab);
 }
 
-char	**fill_soluce(t_plat_info datas, char **tab)
+char	**fill_soluce(t_plat_info datas, char **tab, int i)
 {
-	int i;
-
-	i = 0;
 	if (!(tab = malloc(sizeof(char *) * (datas.nb_lines + 1))))
 		return (0);
 	while (i < datas.nb_lines)
@@ -68,7 +64,7 @@ char	**fill_soluce(t_plat_info datas, char **tab)
 	{
 		tab[i] = ft_strdup(datas.matrix[i]);
 		i++;
-	}                                                              
+	}
 	while (i <= datas.y + datas.best_size)
 	{
 		tab = fill_square(datas, tab, i);
