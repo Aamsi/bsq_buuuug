@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 11:37:53 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 11:50:46 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 14:54:46 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int		count_charac(char *filename)
 	int		fd;
 	char	buf[1];
 	int		nb_charac;
+	int		ret;
 
 	nb_charac = 0;
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (0);
-	while (read(fd, buf, 1) > 0)
+	while ((ret = read(fd, buf, 1) > 0))
 		nb_charac++;
 	close(fd);
 	return (nb_charac);

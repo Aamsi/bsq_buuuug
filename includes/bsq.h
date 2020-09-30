@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:21:44 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 11:58:22 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 14:33:48 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef struct	s_tester
 
 void			print_matrix(t_plat_info datas, char **tab);
 void			ft_putstr(char *str);
+void			free_all_ok(char **strs, char *str);
+void			free_strs(char **strs);
+char			*ft_realloc(char *ptr, int size);
 char			**ft_split(char *str, char *charset);
 char			**get_new_matrix(char **strs);
 char			**fill_soluce(t_plat_info datas, char **tab);
@@ -51,9 +54,11 @@ int				check_first_line(char *str);
 int				nb_columns(char **matrix);
 int				check_nb_lines(char **matrix, int nb_lines);
 int				check_charac(char **matrix, char obst, char empty);
+int				free_struct(t_plat_info infos);
 t_plat_info		solver(t_plat_info datas);
 t_plat_info		parsing(char *filename);
 t_plat_info		reterror(t_plat_info infos, int ertyp, char *big_str,
 						char **matrix);
+t_plat_info		parsing_stdin();
 
 #endif

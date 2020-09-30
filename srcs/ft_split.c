@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:32:58 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 13:42:00 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 14:52:25 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		ft_is_sep(char c, char *charset)
 {
 	int i;
+
 	i = 0;
 	while (charset[i])
 	{
@@ -24,10 +25,12 @@ int		ft_is_sep(char c, char *charset)
 	}
 	return (0);
 }
+
 int		ft_nb_words(char *str, char *charset)
 {
 	int i;
 	int j;
+
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -43,10 +46,12 @@ int		ft_nb_words(char *str, char *charset)
 	}
 	return (j);
 }
-int		ft_len_sep(int n, char *str, char *charset)
+
+int		ft_lsep(int n, char *str, char *charset)
 {
 	int i;
 	int j;
+
 	i = n;
 	j = 0;
 	while (str[i] && !ft_is_sep(str[i], charset))
@@ -56,25 +61,26 @@ int		ft_len_sep(int n, char *str, char *charset)
 	}
 	return (j);
 }
-char	**ft_split(char *str, char *charset)
+
+char	**ft_split(char *str, char *sep)
 {
 	char	**array;
 	int		i;
 	int		j;
 	int		k;
+
 	i = 0;
 	j = 0;
-	if (!(array = malloc(sizeof(char *) * (ft_nb_words(str, charset) + 1))))
+	if (!(array = malloc(sizeof(char *) * (ft_nb_words(str, sep) + 1))))
 		return (0);
 	while (str[i])
 	{
 		k = 0;
-		if (!ft_is_sep(str[i], charset))
+		if (!ft_is_sep(str[i], sep))
 		{
-			if (!(array[j] = malloc(sizeof(char) * (ft_len_sep(i, str, charset) + 1))))
+			if (!(array[j] = malloc(sizeof(char) * (ft_lsep(i, str, sep) + 1))))
 				return (free_split(array, j));
-			// printf("array[j]: %p\n", &(array[j]));
-			while (!ft_is_sep(str[i], charset) && str[i])
+			while (!ft_is_sep(str[i], sep) && str[i])
 				array[j][k++] = str[i++];
 			array[j++][k] = '\0';
 		}
