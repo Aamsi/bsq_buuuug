@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 09:21:44 by iouali            #+#    #+#             */
-/*   Updated: 2020/09/30 20:53:40 by iouali           ###   ########.fr       */
+/*   Updated: 2020/09/30 22:39:55 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void			free_all_ok(char **strs, char *str);
 void			free_strs(char **strs);
 void			debug_matrix(char **strs);
 void			print_info(t_plat_info infos);
+void			free_tab(char **tab);
+void			free_matrix(t_plat_info infos);
 char			**ft_split(char *str, char *charset);
 char			**get_new_matrix(char **strs);
 char			**fill_soluce(t_plat_info datas, char **tab);
