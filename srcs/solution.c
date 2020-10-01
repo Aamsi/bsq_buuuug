@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:02:24 by ebedoise          #+#    #+#             */
-/*   Updated: 2020/09/30 23:17:25 by iouali           ###   ########.fr       */
+/*   Updated: 2020/10/01 09:59:40 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	print_matrix(t_plat_info datas, char **tab, int ac, int index)
 	if (index < ac - 1)
 		write(1, "\n", 1);
 	free_tab(tab);
+	free_matrix(datas);
 }
 
 char	**fill_square(t_plat_info datas, char **tab, int i)
