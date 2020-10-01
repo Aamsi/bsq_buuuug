@@ -6,7 +6,7 @@
 /*   By: iouali <iouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:32:43 by iouali            #+#    #+#             */
-/*   Updated: 2020/10/01 10:18:04 by iouali           ###   ########.fr       */
+/*   Updated: 2020/10/01 10:26:26 by iouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		main(int ac, char **av)
 		matrix = 0;
 		datas.matrix = 0;
 		datas = parsing(av[i]);
-		if (datas.matrix)
+		if (datas.matrix == 0)
 			i < ac - 1 ? ft_str("map error\n\n") : ft_str("map error\n");
 		else
 		{
